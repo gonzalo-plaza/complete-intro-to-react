@@ -4,6 +4,7 @@ import { CartContext } from "../contexts";
 import Header from "../Header";
 import PizzaOfTheDay from "../PizzaOfTheDay";
 import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const Route = createRootRoute({
   component: () => {
@@ -15,9 +16,10 @@ export const Route = createRootRoute({
             <Header />
             <Outlet />
             <PizzaOfTheDay />
-            <TanStackRouterDevtools />
           </div>
         </CartContext.Provider>
+        <TanStackRouterDevtools />
+        <ReactQueryDevtools />
       </>
     );
   },
