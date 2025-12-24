@@ -38,12 +38,12 @@ pnpm start
 ```
 api/
 ├── server.js           # Main server
-├── public/             # Static files
-│   ├── style.css       # Application styles
-│   └── pizzas/         # Pizza images
 ├── pizza.sqlite        # SQLite database
-└── package.json        # Dependencies
+├── package.json        # Dependencies
+└── pnpm-workspace.yaml # Workspace config
 ```
+
+**Note:** Static files (CSS, images) are now located in `../pizza/public/` and are served by the frontend in production. The API only handles API endpoints.
 
 ## 🔌 API Endpoints
 
@@ -113,10 +113,11 @@ Sends a contact message.
 
 ## 📦 Static Files
 
-The server serves static files from `/public/`:
+Static files are served by the frontend application:
 
-- `/public/style.css` - Application styles
-- `/public/pizzas/*.webp` - Pizza images
+- Static files are located in `../pizza/public/`
+- In production, the frontend (Vercel) serves these files
+- The API only handles API endpoints (`/api/*`)
 
 ## 🗄️ Database
 
@@ -133,12 +134,16 @@ The SQLite database (`pizza.sqlite`) contains the following tables:
 
 - `PORT` - Server port (default: 3000)
 
-### Serving Frontend
+### Deployment
 
-In production, the server also serves the built frontend from `../pizza/dist/`. Routes that are not `/api/*` or `/public/*` will serve the frontend's `index.html` to support SPA routing.
+The API is deployed separately from the frontend:
+- **API**: Deployed on Render (or similar platform)
+- **Frontend**: Deployed on Vercel
+- The frontend makes API calls to the backend URL
 
 ## 📝 Notes
 
 - The server uses SQLite transactions to ensure order integrity
 - Logs are displayed with `pino-pretty` in development
-- CSS is served from the backend to maintain a learning approach
+- The API and frontend are deployed separately
+- Environment variable `RENDER` is used to detect Render deployment and set the correct HOST

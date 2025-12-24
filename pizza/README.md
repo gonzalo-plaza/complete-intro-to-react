@@ -20,7 +20,7 @@ The development server will run on `http://localhost:5173` (Vite's default port)
 
 ```bash
 # From the monorepo root
-pnpm build:prod
+pnpm build:pizza
 
 # Or from this directory
 pnpm build
@@ -42,13 +42,27 @@ The build will be generated in the `dist/` folder.
 ```
 pizza/
 ├── src/
-│   ├── routes/          # Application routes
+│   ├── routes/          # Application routes (TanStack Router)
 │   ├── api/             # API call functions
 │   ├── contexts/        # React contexts
-│   └── components/      # Reusable components
+│   ├── components/       # Reusable components
+│   ├── __tests__/       # Test files
+│   ├── App.jsx          # Main app component
+│   ├── routeTree.gen.ts # Generated route tree
+│   └── ...              # Other source files
+├── public/              # Static files
+│   ├── style.css        # Application styles
+│   ├── pizzas/          # Pizza images
+│   ├── padre_gino.svg   # Logo
+│   └── Pacifico-Regular.ttf # Font
 ├── dist/                # Production build (generated)
+├── coverage/            # Test coverage (generated)
 ├── index.html           # Main HTML
-└── vite.config.js       # Vite configuration
+├── vite.config.js       # Vite configuration
+├── vercel.json          # Vercel deployment config
+├── eslint.config.mjs    # ESLint configuration
+├── vitest.workspace.js  # Vitest configuration
+└── package.json         # Dependencies
 ```
 
 ## 📦 Scripts
@@ -66,7 +80,7 @@ pizza/
 
 ## 🎨 Styles
 
-Styles are served from the backend at `/public/style.css`. During the build, Vite will show an informational warning about this file, but this is expected behavior since the CSS is resolved at runtime from the server.
+Styles are located in `public/style.css` and served by the frontend application. The CSS is bundled and served as a static asset.
 
 ## 🔌 API
 
@@ -93,6 +107,6 @@ pnpm coverage
 
 ## 📝 Notes
 
-- Vite proxy redirects `/api/*` and `/public/*` to the backend in development
-- In production, the frontend is served from the same Fastify server
+- The frontend is deployed on Vercel and makes API calls to the backend (deployed on Render)
 - React Compiler is enabled for automatic optimizations
+- Devtools (TanStack Router and React Query) are only shown in development mode
