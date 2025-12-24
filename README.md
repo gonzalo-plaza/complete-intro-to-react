@@ -1,6 +1,6 @@
 # Complete Intro to React v9
 
-![Frontend Masters](https://static.frontendmasters.com/assets/fm-logo.svg)
+<img src="images/frontendmasters_logo.svg" alt="Frontend Masters" width="400" />
 
 This project is a monorepo developed following the [**Complete Intro to React v9**](https://frontendmasters.com/courses/complete-react-v9/) course from [Frontend Masters](https://frontendmasters.com/).
 
