@@ -24,6 +24,21 @@ server.register(fastifyStatic, {
   prefix: "/public/",
 });
 
+const frontendDistPath = path.join(__dirname, "../pizza/dist");
+try {
+
+  const fs = await import("fs/promises");
+  await fs.access(frontendDistPath);
+  
+  server.register(fastifyStatic, {
+    root: frontendDistPath,
+    prefix: "/",
+    decorateReply: false,
+  });
+} catch (error) {
+  server.log.info("Frontend dist not found, running in API mode");
+}
+
 server.get("/api/pizzas", async function getPizzas(req, res) {
   const pizzasPromise = db.all(
     "SELECT pizza_type_id, name, category, ingredients as description FROM pizza_types"
@@ -296,6 +311,28 @@ server.post("/api/contact", async function contactForm(req, res) {
   `);
 
   res.send({ success: "Message received" });
+});
+
+// Ruta catch-all para servir el frontend (SPA routing)
+// Debe ir al final, después de todas las rutas de API
+server.setNotFoundHandler(async (req, res) => {
+  // Si es una ruta de API o public, devolver 404
+  if (req.url.startsWith("/api") || req.url.startsWith("/public")) {
+    return res.status(404).send({ error: "Not found" });
+  }
+  
+  // Para cualquier otra ruta, servir index.html del frontend (SPA)
+  try {
+    const fs = await import("fs/promises");
+    const indexPath = path.join(frontendDistPath, "index.html");
+    await fs.access(indexPath);
+    return res.sendFile("index.html", frontendDistPath);
+  } catch (error) {
+    // Si no existe el frontend construido, devolver 404
+    return res.status(404).send({ 
+      error: "Frontend no construido. Ejecuta 'pnpm build:pizza' primero." 
+    });
+  }
 });
 
 const start = async () => {
