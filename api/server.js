@@ -14,6 +14,9 @@ const server = fastify({
 
 const PORT = process.env.PORT || 3000;
 
+// Create a HOST property after the PORT property
+const HOST = ("RENDER" in process.env) ? `0.0.0.0` : `localhost`;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -327,7 +330,7 @@ server.addHook('preHandler', (req, res, done) => {
 
 const start = async () => {
   try {
-    await server.listen({ port: PORT });
+    await server.listen({ port: PORT, host: HOST });
     console.log(`Server listening on port ${PORT}`);
   } catch (err) {
     console.error(err);
