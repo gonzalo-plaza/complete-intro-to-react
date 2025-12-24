@@ -3,7 +3,8 @@ import Cart from "../Cart";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../contexts";
 import { createLazyFileRoute } from "@tanstack/react-router";
-
+import getPizzas from "../api/getPizzas";
+import postOrder from "../api/postOrder";
 export const Route = createLazyFileRoute("/order")({
   component: Order,
 });
@@ -29,22 +30,14 @@ function Order() {
   }
 
   async function fetchPizzaTypes() {
-    const pizzaRes = await fetch("api/pizzas");
-    const pizzaJson = await pizzaRes.json();
-    setPizzaTypes(pizzaJson);
+    const pizzaRes = await getPizzas();
+    setPizzaTypes(pizzaRes);
     setLoading(false);
   }
 
   async function checkout() {
     setLoading(true);
-    await fetch("api/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ cart }),
-    });
-
+    await postOrder(cart);
     setCart([]);
     setLoading(false);
   }
