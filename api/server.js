@@ -91,7 +91,7 @@ server.get("/api/pizza-of-the-day", async function getPizzaOfTheDay(req, res) {
     name: pizza.name,
     category: pizza.category,
     description: pizza.description,
-    image: `/public/pizzas/${pizza.id}.webp`,
+    image: `/pizzas/${pizza.id}.webp`,
     sizes: sizeObj,
   };
 
