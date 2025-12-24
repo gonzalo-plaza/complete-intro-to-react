@@ -49,11 +49,10 @@ pnpm dev:api
 ### Production
 
 ```bash
-# Build and run in production mode
-pnpm start:prod
+# Build frontend for production
+pnpm build:pizza
 
-# Or build and run separately
-pnpm build:prod
+# Start backend server
 pnpm start:api
 ```
 
@@ -64,8 +63,7 @@ pnpm start:api
 | `pnpm dev` | Runs frontend and backend in development mode |
 | `pnpm dev:pizza` | Runs frontend only |
 | `pnpm dev:api` | Runs backend only |
-| `pnpm build:prod` | Builds frontend for production |
-| `pnpm start:prod` | Builds and runs in production mode |
+| `pnpm build:pizza` | Builds frontend for production |
 | `pnpm start:api` | Starts the backend server |
 | `pnpm test:pizza` | Runs frontend tests |
 | `pnpm lint:pizza` | Runs the linter |
@@ -115,7 +113,9 @@ complete-intro-to-react/
 
 - The CSS (`style.css`) is served from the backend at `/public/style.css`
 - The SQLite database is located at `api/pizza.sqlite`
-- The built frontend is served from the same Fastify server
+- Frontend and backend are deployed separately:
+  - Frontend: Vercel
+  - Backend: Render
 
 ## 🔗 Links
 

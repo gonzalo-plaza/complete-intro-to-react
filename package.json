@@ -10,10 +10,7 @@
     "dev:pizza": "pnpm --filter pizza dev",
     "dev:api": "pnpm --filter api dev",
     "build:pizza": "pnpm --filter pizza build",
-    "build:prod": "pnpm --filter pizza build",
     "start:api": "pnpm --filter api start",
-    "start:prod": "pnpm build:prod && pnpm --filter api start",
-    "preview:prod": "pnpm build:prod && pnpm --filter api start",
     "test:pizza": "pnpm --filter pizza test",
     "lint:pizza": "pnpm --filter pizza lint",
     "format:pizza": "pnpm --filter pizza format"
