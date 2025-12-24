@@ -1,0 +1,8 @@
+packages:
+  - api
+  - pizza
+
+onlyBuiltDependencies:
+  - esbuild
+  - msw
+  - sqlite3

@@ -1,0 +1,30 @@
+{
+  "name": "complete-intro-to-react",
+  "version": "1.0.0",
+  "description": "Monorepo para la aplicación de pizzas con frontend React y backend Fastify",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.8.0",
+  "scripts": {
+    "dev": "pnpm --filter pizza dev & pnpm --filter api dev",
+    "dev:pizza": "pnpm --filter pizza dev",
+    "dev:api": "pnpm --filter api dev",
+    "build:pizza": "pnpm --filter pizza build",
+    "build:prod": "pnpm --filter pizza build",
+    "start:api": "pnpm --filter api start",
+    "start:prod": "pnpm build:prod && pnpm --filter api start",
+    "preview:prod": "pnpm build:prod && pnpm --filter api start",
+    "test:pizza": "pnpm --filter pizza test",
+    "lint:pizza": "pnpm --filter pizza lint",
+    "format:pizza": "pnpm --filter pizza format"
+  },
+  "keywords": [
+    "monorepo",
+    "react",
+    "fastify",
+    "pizza"
+  ],
+  "author": "",
+  "license": "ISC"
+}
+
