@@ -19,26 +19,6 @@ const __dirname = path.dirname(__filename);
 
 const db = await AsyncDatabase.open("./pizza.sqlite");
 
-server.register(fastifyStatic, {
-  root: path.join(__dirname, "public"),
-  prefix: "/public/",
-});
-
-const frontendDistPath = path.join(__dirname, "../pizza/dist");
-try {
-
-  const fs = await import("fs/promises");
-  await fs.access(frontendDistPath);
-  
-  server.register(fastifyStatic, {
-    root: frontendDistPath,
-    prefix: "/",
-    decorateReply: false,
-  });
-} catch (error) {
-  server.log.info("Frontend dist not found, running in API mode");
-}
-
 server.get("/api/pizzas", async function getPizzas(req, res) {
   const pizzasPromise = db.all(
     "SELECT pizza_type_id, name, category, ingredients as description FROM pizza_types"
